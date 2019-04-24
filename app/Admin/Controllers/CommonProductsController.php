@@ -38,7 +38,7 @@ abstract class CommonProductsController extends Controller
             ->body($this->form());
     }
 
-     protected function grid()
+    protected function grid()
     {
         $grid = new Grid(new Product());
 
