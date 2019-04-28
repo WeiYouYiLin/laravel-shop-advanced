@@ -47,6 +47,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('crowdfunding_orders', 'OrdersController@crowdfunding')->name('crowdfunding_orders.store');
     // 创建分期付款接口
     Route::post('payment/{order}/installment', 'PaymentController@payByInstallment')->name('payment.installment');
+    // 分期付款列表页
+    Route::get('installments', 'InstallmentsController@index')->name('installments.index');
 });
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
