@@ -49,6 +49,8 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     Route::post('payment/{order}/installment', 'PaymentController@payByInstallment')->name('payment.installment');
     // 分期付款列表页
     Route::get('installments', 'InstallmentsController@index')->name('installments.index');
+    // 分期详情页
+    Route::get('installments/{installment}', 'InstallmentsController@show')->name('installments.show');
 });
 Route::get('products/{product}', 'ProductsController@show')->name('products.show');
 Route::post('payment/alipay/notify', 'PaymentController@alipayNotify')->name('payment.alipay.notify');
