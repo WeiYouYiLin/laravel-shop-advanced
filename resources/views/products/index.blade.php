@@ -168,6 +168,7 @@
       _.forEach(searches, function (value, key) {
         query += encodeURIComponent(key) + '=' + encodeURIComponent(value) + '&';
       });
+      console.log(query);
       // 去除最末尾的 & 符号
       return query.substr(0, query.length - 1);
     }
