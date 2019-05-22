@@ -238,4 +238,5 @@ return [
     'min_installment_amount' => 300, // 最低分期金额
     'installment_fine_rate' => 0.05, // 逾期日息 0.05%
 
+    'seckill_order_ttl' => 600, // 秒杀订单支付时间
 ];

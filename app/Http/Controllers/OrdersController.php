@@ -16,6 +16,7 @@ use Illuminate\Http\Request;
 use App\Services\OrderService;
 use App\Http\Requests\CrowdFundingOrderRequest;
 use App\Models\ProductSku;
+use App\Http\Requests\SeckillOrderRequest;
 
 class OrdersController extends Controller
 {
@@ -152,5 +153,15 @@ class OrdersController extends Controller
         $amount  = $request->input('amount');
 
         return $orderService->crowdfunding($user, $address, $sku, $amount);
+    }
+
+    // 秒杀商品下单
+    public function seckill(SeckillOrderRequest $request, OrderService $orderService)
+    {
+        $user    = $request->user();
+        $address = UserAddress::find($request->input('address_id'));
+        $sku     = ProductSku::find($request->input('sku_id'));
+
+        return $orderService->seckill($user, $address, $sku);
     }
 }
