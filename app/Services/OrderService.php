@@ -135,19 +135,26 @@ class OrderService
         return $order;
     }
     
-    // 秒杀
-    public function seckill(User $user, UserAddress $address, ProductSku $sku)
+    // 秒杀 将原本的 UserAddress 类型改成 array 类型
+    public function seckill(User $user, /*UserAddress $address*/ array $addressData, ProductSku $sku)
     {
-        $order = \DB::transaction(function () use ($user, $address, $sku) {
+        // 将 $addressData 传入匿名函数
+        $order = \DB::transaction(function () use ($user, /*$address*/ $addressData, $sku) {
             // 更新此地址的最后使用时间
-            $address->update(['last_used_at' => Carbon::now()]);
+            //$address->update(['last_used_at' => Carbon::now()]);
             // 创建一个订单
             $order = new Order([
-                'address'      => [ // 将地址信息放入订单中
+                /*'address'      => [ // 将地址信息放入订单中
                     'address'       => $address->full_address,
                     'zip'           => $address->zip,
                     'contact_name'  => $address->contact_name,
                     'contact_phone' => $address->contact_phone,
+                ],*/
+                'address'      => [ // address 字段直接从 $addressData 数组中读取
+                    'address'       => $addressData['province'].$addressData['city'].$addressData['district'].$addressData['address'],
+                    'zip'           => $addressData['zip'],
+                    'contact_name'  => $addressData['contact_name'],
+                    'contact_phone' => $addressData['contact_phone'],
                 ],
                 'remark'       => '',
                 'total_amount' => $sku->price,
