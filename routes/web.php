@@ -10,6 +10,8 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+// 生成秒杀订单 仅当秒杀商品有剩余库存时才校验登录凭证，先将秒杀下单接口从路由组中移出，放到路由文件的最开头
+Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
 
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
@@ -46,7 +48,7 @@ Route::group(['middleware' => ['auth', 'verified']], function() {
     // 生成众筹订单
     Route::post('crowdfunding_orders', 'OrdersController@crowdfunding')->name('crowdfunding_orders.store');
     // 生成秒杀订单
-    Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
+    //Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
     // 创建分期付款接口
     Route::post('payment/{order}/installment', 'PaymentController@payByInstallment')->name('payment.installment');
     // 分期付款列表页
