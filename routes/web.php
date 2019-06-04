@@ -11,7 +11,7 @@
 |
 */
 // 生成秒杀订单 仅当秒杀商品有剩余库存时才校验登录凭证，先将秒杀下单接口从路由组中移出，放到路由文件的最开头
-Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store');
+Route::post('seckill_orders', 'OrdersController@seckill')->name('seckill_orders.store')->middleware('random_drop:80');
 
 Route::redirect('/', '/products')->name('root');
 Route::get('products', 'ProductsController@index')->name('products.index');
