@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
                 \Log::info(Str::replaceArray('?', $query->bindings, $query->sql));
             });
         }
-        // horizon 访问权限
+       /* // horizon 访问权限
         Horizon::auth(function ($request) {
             // 这里进行判断，根据需求自行选择
 
@@ -43,7 +43,7 @@ class AppServiceProvider extends ServiceProvider
                 return true;
             }
 
-        });
+        });*/
     }
 
     /**
